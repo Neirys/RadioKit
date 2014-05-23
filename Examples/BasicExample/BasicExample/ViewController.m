@@ -22,20 +22,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/playing.xml"
-                                       responseFormat:ROKRadioResponseFormatXML
-                                           trackOrder:ROKRadioTrackOrderAsc
-                                         titleKeyPath:@"info.chanson"
-                                        artistKeyPath:@"info.artiste"];
-    ROKRequest *voltageRequest = [ROKRequest requestWithRadio:voltage];
-    [voltageRequest perform:^(NSArray *response, NSError *error) {
-        NSLog(@"%@", response);
+    ROKRequest *voltageRequest = [ROKRequest requestWithURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML titleKeyPath:@"info.chanson" artistKeyPath:@"info.artiste"];
+    [voltageRequest perform:^(NSArray *results, NSError *error) {
+        NSLog(@"%@", results);
     }];
-    
-    ROKRadio *skyrock = [ROKRadio radioWithRequestURL:@"http://skyrock.fm/api-fm/schedule.php/recent.json" responseFormat:ROKRadioResponseFormatJSON trackOrder:ROKRadioTrackOrderDesc titleKeyPath:@"schedule.info.title" artistKeyPath:@"schedule.artists.name"];
-    ROKRequest *skyrockRequest = [ROKRequest requestWithRadio:skyrock];
-//    [skyrockRequest perform:^(NSArray *response, NSError *error) {
-//    }];
 }
 
 - (void)didReceiveMemoryWarning

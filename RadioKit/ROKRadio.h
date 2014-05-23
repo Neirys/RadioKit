@@ -17,11 +17,11 @@
 @property (copy, nonatomic) NSString *titleKeyPath;
 @property (copy, nonatomic) NSString *artistKeyPath;
 @property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
-@property (assign, nonatomic) ROKRadioResponseFormat responseFormat;
+@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
 
 
 + (instancetype)radioWithRequestURL:(NSString *)requestURL
-                     responseFormat:(ROKRadioResponseFormat)responseFormat
+                     responseFormat:(ROKRequestResponseFormat)responseFormat
                          trackOrder:(ROKRadioTrackOrder)trackOrder
                        titleKeyPath:(NSString *)titleKeyPath
                       artistKeyPath:(NSString *)artistKeyPath;

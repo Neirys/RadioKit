@@ -20,19 +20,21 @@
 
 #pragma mark - Life cycle methods
 
-- (instancetype)initWithRadio:(id<ROKRadio>)radio
+- (instancetype)initWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath
 {
-    self = [super init];
-    if (self)
+    if (self = [super init])
     {
-        _radio = radio;
+        _URL = URL;
+        _responseFormat = responseFormat;
+        _titleKeyPath = titleKeyPath;
+        _artistKeyPath = artistKeyPath;
     }
     return self;
 }
 
-+ (instancetype)requestWithRadio:(id<ROKRadio>)radio
++ (instancetype)requestWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath
 {
-    return [[self alloc] initWithRadio:radio];
+    return [[self alloc] initWithURL:URL responseFormat:responseFormat titleKeyPath:titleKeyPath artistKeyPath:artistKeyPath];
 }
 
 #pragma mark - Public methods
@@ -41,21 +43,21 @@
 {
     NSParameterAssert(completion);
     
-    [self performRequestWithResponseFormat:self.radio.responseFormat completion:^(NSArray *results, NSError *error) {
+    [self performRequestWithResponseFormat:self.responseFormat completion:^(NSArray *results, NSError *error) {
         completion(results, error);
     }];
 }
 
 #pragma mark - Private methods
 
-- (void)performRequestWithResponseFormat:(ROKRadioResponseFormat)responseFormat completion:(ROKRequestCompletionBlock)completion
+- (void)performRequestWithResponseFormat:(ROKRequestResponseFormat)responseFormat completion:(ROKRequestCompletionBlock)completion
 {
     NSParameterAssert(completion);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [self responseSerializerForResponseFormat:responseFormat];
-    [manager GET:self.radio.requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *response = (responseFormat == ROKRadioResponseFormatXML
+    [manager GET:self.URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *response = (responseFormat == ROKRequestResponseFormatXML
                                   ? [NSDictionary dictionaryWithXMLParser:responseObject]
                                   : (NSDictionary *)responseObject);
         NSArray *results = [self processResponse:response];
@@ -67,8 +69,8 @@
 
 - (NSArray *)processResponse:(NSDictionary *)response
 {
-    NSArray *titles = [response arrayValueForKeyPath:self.radio.titleKeyPath];
-    NSArray *artists = [response arrayValueForKeyPath:self.radio.artistKeyPath];
+    NSArray *titles = [response arrayValueForKeyPath:self.titleKeyPath];
+    NSArray *artists = [response arrayValueForKeyPath:self.artistKeyPath];
     
     NSAssert(titles.count == artists.count, @"RadioKit error : titles array count differs from artists array count");
     
@@ -92,14 +94,14 @@
 
 #pragma mark - Helper methods
 
-- (AFHTTPResponseSerializer<AFURLResponseSerialization>*)responseSerializerForResponseFormat:(ROKRadioResponseFormat)responseFormat
+- (AFHTTPResponseSerializer<AFURLResponseSerialization>*)responseSerializerForResponseFormat:(ROKRequestResponseFormat)responseFormat
 {
     static NSDictionary *mapping;
     if (!mapping)
     {
         mapping = @{
-                    @(ROKRadioResponseFormatJSON) : [AFJSONResponseSerializer new],
-                    @(ROKRadioResponseFormatXML) : [AFXMLParserResponseSerializer new]
+                    @(ROKRequestResponseFormatJSON) : [AFJSONResponseSerializer new],
+                    @(ROKRequestResponseFormatXML) : [AFXMLParserResponseSerializer new]
                     };
     }
     return mapping[@(responseFormat)] ?: [AFJSONResponseSerializer new];

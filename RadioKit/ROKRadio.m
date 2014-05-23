@@ -25,7 +25,7 @@
 }
 
 - (instancetype)initWithRequestURL:(NSString *)requestURL
-                    responseFormat:(ROKRadioResponseFormat)responseFormat
+                    responseFormat:(ROKRequestResponseFormat)responseFormat
                         trackOrder:(ROKRadioTrackOrder)trackOrder
                       titleKeyPath:(NSString *)titleKeyPath
                      artistKeyPath:(NSString *)artistKeyPath
@@ -44,7 +44,7 @@
 
 
 + (instancetype)radioWithRequestURL:(NSString *)requestURL
-                     responseFormat:(ROKRadioResponseFormat)responseFormat
+                     responseFormat:(ROKRequestResponseFormat)responseFormat
                          trackOrder:(ROKRadioTrackOrder)trackOrder
                        titleKeyPath:(NSString *)titleKeyPath
                       artistKeyPath:(NSString *)artistKeyPath
@@ -114,17 +114,17 @@
 
 #pragma mark - Helper methods
 
-- (ROKRadioResponseFormat)responseFormatForString:(NSString *)string
+- (ROKRequestResponseFormat)responseFormatForString:(NSString *)string
 {
     static NSDictionary *mapping;
     if (!mapping)
     {
         mapping = @{
-                    @"xml" : @(ROKRadioResponseFormatXML),
-                    @"json" : @(ROKRadioResponseFormatJSON),
+                    @"xml" : @(ROKRequestResponseFormatXML),
+                    @"json" : @(ROKRequestResponseFormatJSON),
                     };
     }
-    return [mapping[string] integerValue] ?: ROKRadioResponseFormatJSON;
+    return [mapping[string] integerValue] ?: ROKRequestResponseFormatJSON;
 }
 
 - (ROKRadioTrackOrder)trackOrderForString:(NSString *)string

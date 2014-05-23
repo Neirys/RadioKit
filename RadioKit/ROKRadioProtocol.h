@@ -8,17 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, ROKRadioResponseFormat)
-{
-    ROKRadioResponseFormatJSON,
-    ROKRadioResponseFormatXML,
-};
-
 typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 {
     ROKRadioTrackOrderAsc,
     ROKRadioTrackOrderDesc,
 };
+
+@protocol ROKRadioRequest <NSObject>
+
+@required
+@property (copy, nonatomic) NSString *requestURL;
+@property (copy, nonatomic) NSString *titleKeyPath;
+@property (copy, nonatomic) NSString *artistKeyPath;
+//@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
+
+@end
 
 @protocol ROKRadio <NSObject>
 
@@ -27,7 +31,7 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @property (copy, nonatomic) NSString *titleKeyPath;
 @property (copy, nonatomic) NSString *artistKeyPath;
 @property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
-@property (assign, nonatomic) ROKRadioResponseFormat responseFormat;
+//@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
 
 @end
 

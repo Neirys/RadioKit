@@ -10,13 +10,21 @@
 
 typedef void (^ROKRequestCompletionBlock)(NSArray *results, NSError *error);
 
-@protocol ROKRadio;
+typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
+{
+    ROKRequestResponseFormatJSON,
+    ROKRequestResponseFormatXML,
+};
 
 @interface ROKRequest : NSObject
 
-@property (strong, nonatomic) id<ROKRadio> radio;
+@property (copy, nonatomic) NSString *URL;
+@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
+@property (copy, nonatomic) NSString *titleKeyPath;
+@property (copy, nonatomic) NSString *artistKeyPath;
 
-+ (instancetype)requestWithRadio:(id<ROKRadio>)radio;
+- (instancetype)initWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath;
++ (instancetype)requestWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath;
 
 - (void)perform:(ROKRequestCompletionBlock)completion;
 
