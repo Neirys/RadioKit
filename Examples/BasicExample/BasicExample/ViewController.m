@@ -10,6 +10,7 @@
 
 #import "ROKRequest.h"
 #import "ROKRadio.h"
+#import "ROKTrack.h"
 
 @interface ViewController ()
 
@@ -22,16 +23,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    Class trackClass = [ROKTrack class];
+    NSLog(@"%d", [trackClass conformsToProtocol:@protocol(ROKTrack)]);
+    
+    
 //    ROKRequest *voltageRequest = [ROKRequest requestWithURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML titleKeyPath:@"info.chanson" artistKeyPath:@"info.artiste"];
     ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML trackOrder:ROKRadioTrackOrderAsc titleKeyPath:@"info.title" artistKeyPath:@"info.artist"];
-//    [voltage lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {
-//        NSLog(@"%@", request);
-//        NSLog(@"%@", tracks);
-//        NSLog(@"%@", error);
-//    }];
-    [voltage lastTrack:^(ROKRequest *request, id track, NSError *error) {
+    voltage.trackMappingClass = [ROKTrack class];
+    NSLog(@"%@", voltage.trackMappingClass);
+    [voltage lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {
         NSLog(@"%@", request);
-        NSLog(@"%@", track);
+        NSLog(@"%@", tracks);
         NSLog(@"%@", error);
     }];
     

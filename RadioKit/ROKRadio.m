@@ -10,6 +10,13 @@
 
 #import "ROKTrack.h"
 
+@interface ROKRadio ()
+{
+    __unsafe_unretained Class _trackMappingClass;
+}
+
+@end
+
 @implementation ROKRadio
 
 #pragma mark - Life cycle
@@ -149,6 +156,8 @@
     
     ROKRequest *request = [ROKRequest requestWithParameter:self];
     [request perform:^(NSArray *results, NSError *error) {
+        if (self.trackMappingClass)
+            results = [self mapRawTracksToObjects:results];
         completion(request, results, error);
     }];
 }
@@ -162,6 +171,37 @@
         id lastTrack = trackOrder == ROKRadioTrackOrderAsc ? tracks.firstObject : tracks.lastObject;
         completion(request, lastTrack, error);
     }];
+}
+
+@end
+
+@implementation ROKRadio (ROKMapping)
+
+- (Class)trackMappingClass
+{
+    return _trackMappingClass;
+}
+
+- (void)setTrackMappingClass:(Class)trackMappingClass
+{
+    _trackMappingClass = trackMappingClass;
+}
+
+- (NSArray *)mapRawTracksToObjects:(NSArray *)objects
+{
+    if (!_trackMappingClass || ![_trackMappingClass conformsToProtocol:@protocol(ROKTrack)])
+        return objects;
+    
+    NSMutableArray *mappedTracks = [NSMutableArray arrayWithCapacity:objects.count];
+    for (NSDictionary *track in objects)
+    {
+        id<ROKTrack> mappedTrack = [[_trackMappingClass alloc] init];
+        mappedTrack.title = track[kROKRequestTitleKey];
+        mappedTrack.artist = track[kROKRequestArtistKey];
+        [mappedTracks addObject:mappedTrack];
+    }
+    
+    return mappedTracks;
 }
 
 @end

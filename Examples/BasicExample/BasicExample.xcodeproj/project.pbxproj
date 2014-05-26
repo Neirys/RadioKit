@@ -70,12 +70,10 @@
 		F8EEEE01192FAFDF00A02D1F /* BasicExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicExampleTests.m; sourceTree = "<group>"; };
 		F8EEEE22192FB06200A02D1F /* ROKRadio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROKRadio.h; sourceTree = "<group>"; };
 		F8EEEE23192FB06200A02D1F /* ROKRadio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROKRadio.m; sourceTree = "<group>"; };
-		F8EEEE24192FB06200A02D1F /* ROKRadioProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROKRadioProtocol.h; sourceTree = "<group>"; };
 		F8EEEE25192FB06200A02D1F /* ROKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROKRequest.h; sourceTree = "<group>"; };
 		F8EEEE26192FB06200A02D1F /* ROKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROKRequest.m; sourceTree = "<group>"; };
 		F8EEEE27192FB06200A02D1F /* ROKTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROKTrack.h; sourceTree = "<group>"; };
 		F8EEEE28192FB06200A02D1F /* ROKTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROKTrack.m; sourceTree = "<group>"; };
-		F8EEEE29192FB06200A02D1F /* ROKTrackProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROKTrackProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,12 +201,10 @@
 			children = (
 				F8EEEE22192FB06200A02D1F /* ROKRadio.h */,
 				F8EEEE23192FB06200A02D1F /* ROKRadio.m */,
-				F8EEEE24192FB06200A02D1F /* ROKRadioProtocol.h */,
 				F8EEEE25192FB06200A02D1F /* ROKRequest.h */,
 				F8EEEE26192FB06200A02D1F /* ROKRequest.m */,
 				F8EEEE27192FB06200A02D1F /* ROKTrack.h */,
 				F8EEEE28192FB06200A02D1F /* ROKTrack.m */,
-				F8EEEE29192FB06200A02D1F /* ROKTrackProtocol.h */,
 				F8A8DC5F192FB20A004F2A15 /* NSString+Levenshtein.h */,
 				F8A8DC60192FB20A004F2A15 /* NSString+Levenshtein.m */,
 				F8A8DC61192FB20A004F2A15 /* NSString+ROKExtras.h */,

@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ROKTrackProtocol.h"
+@protocol ROKTrack <NSObject>
 
-#warning Remove NSCoding
-@interface ROKTrack : NSObject <ROKTrack, NSCoding>
+@required
+@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *artist;
+
+@end
+
+@interface ROKTrack : NSObject <ROKTrack>
 
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *artist;

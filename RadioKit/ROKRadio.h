@@ -21,12 +21,10 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
     ROKRadioTrackOrderDesc,
 };
 
-@protocol ROKRequestParameter;
+@protocol ROKRequestParameter, ROKTrack;
 
 @protocol ROKRadio <ROKRequestParameter>
-
 @property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
-
 @end
 
 @interface ROKRadio : NSObject <ROKRadio>
@@ -57,6 +55,11 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 
 @interface ROKRadio (ROKMapping)
 
-@property (assign, nonatomic) Class trackMappingClass;
+// must conforms to ROKTrack protocol
+@property (unsafe_unretained, nonatomic) Class trackMappingClass;
+
+#warning Try a way to hide this from .h
+- (NSArray *)mapRawTracksToObjects:(NSArray *)objects;
+
 
 @end

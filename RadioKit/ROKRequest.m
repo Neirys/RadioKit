@@ -15,8 +15,8 @@
 
 #define NO_INTERNET
 
-static NSString * const kROKRequestTitleKey     =   @"title";
-static NSString * const kROKRequestArtistKey    =   @"artist";
+NSString * const kROKRequestTitleKey     =   @"title";
+NSString * const kROKRequestArtistKey    =   @"artist";
 
 @interface ROKRequest ()
 @end

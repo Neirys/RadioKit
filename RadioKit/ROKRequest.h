@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kROKRequestTitleKey;
+extern NSString * const kROKRequestArtistKey;
+
 typedef void (^ROKRequestCompletionBlock)(NSArray *results, NSError *error);
 
 typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
