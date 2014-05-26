@@ -23,7 +23,10 @@
 
 + (instancetype)trackWithTitle:(NSString *)title artist:(NSString *)artist;
 
-#warning Separate in categories
+@end
+
+@interface ROKTrack (ROKMatching)
+
 - (BOOL)matchingTrack:(ROKTrack *)track;
 - (BOOL)matchingTrackWithTitle:(NSString *)title artist:(NSString *)artist;
 
