@@ -13,6 +13,11 @@
 #import "AFNetworking.h"
 #import "XMLDictionary.h"
 
+#define NO_INTERNET
+
+static NSString * const kROKRequestTitleKey     =   @"title";
+static NSString * const kROKRequestArtistKey    =   @"artist";
+
 @interface ROKRequest ()
 @end
 
@@ -24,7 +29,7 @@
 {
     if (self = [super init])
     {
-        _URL = URL;
+        _requestURL = URL;
         _responseFormat = responseFormat;
         _titleKeyPath = titleKeyPath;
         _artistKeyPath = artistKeyPath;
@@ -39,7 +44,7 @@
 
 + (instancetype)requestWithParameter:(id<ROKRequestParameter>)parameter
 {
-    return [[self alloc] initWithURL:parameter.URL responseFormat:parameter.responseFormat titleKeyPath:parameter.titleKeyPath artistKeyPath:parameter.artistKeyPath];
+    return [[self alloc] initWithURL:parameter.requestURL responseFormat:parameter.responseFormat titleKeyPath:parameter.titleKeyPath artistKeyPath:parameter.artistKeyPath];
 }
 
 #pragma mark - Public methods
@@ -49,7 +54,15 @@
     NSParameterAssert(completion);
     
     [self performRequestWithResponseFormat:self.responseFormat completion:^(NSArray *results, NSError *error) {
+#ifndef NO_INTERNET
         completion(results, error);
+#else
+        NSArray *fixtures = @[
+                              @{kROKRequestArtistKey : @"Eminem", kROKRequestTitleKey : @"Rythm or Reason"},
+                              @{kROKRequestArtistKey : @"David Dallas", kROKRequestTitleKey : @"Runnin"},
+                              ];
+        completion(fixtures, nil);
+#endif
     }];
 }
 
@@ -61,7 +74,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [self responseSerializerForResponseFormat:responseFormat];
-    [manager GET:self.URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:self.requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *response = (responseFormat == ROKRequestResponseFormatXML
                                   ? [NSDictionary dictionaryWithXMLParser:responseObject]
                                   : (NSDictionary *)responseObject);
@@ -91,7 +104,7 @@
         if ([artist isKindOfClass:[NSArray class]])
             artist = [artist componentsJoinedByString:@" / "];
         
-        [results addObject:@{@"title" : title, @"artist" : artist}];
+        [results addObject:@{kROKRequestTitleKey : title, kROKRequestArtistKey : artist}];
     }
     
     return results.copy;

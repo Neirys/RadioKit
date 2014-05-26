@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 @protocol ROKRequestParameter <NSObject>
 
 @required
-@property (copy, nonatomic) NSString *URL;
+@property (copy, nonatomic) NSString *requestURL;
 @property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
 @property (copy, nonatomic) NSString *titleKeyPath;
 @property (copy, nonatomic) NSString *artistKeyPath;
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 
 @interface ROKRequest : NSObject <ROKRequestParameter>
 
-@property (copy, nonatomic) NSString *URL;
+@property (copy, nonatomic) NSString *requestURL;
 @property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
 @property (copy, nonatomic) NSString *titleKeyPath;
 @property (copy, nonatomic) NSString *artistKeyPath;

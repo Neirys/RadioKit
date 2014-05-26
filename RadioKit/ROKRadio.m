@@ -7,6 +7,8 @@
 //
 
 #import "ROKRadio.h"
+
+#import "ROKRequest.h"
 #import "ROKTrack.h"
 
 @interface ROKRadio ()

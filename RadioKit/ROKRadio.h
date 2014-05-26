@@ -8,14 +8,31 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ROKRequest.h"
 
-@interface ROKRadio : NSObject
+typedef ROKRequestResponseFormat ROKRadioResponseFormat;
+
+typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
+{
+    ROKRadioTrackOrderAsc,
+    ROKRadioTrackOrderDesc,
+};
+
+@protocol ROKRequestParameter;
+
+@protocol ROKRadio <ROKRequestParameter>
+
+@property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
+
+@end
+
+@interface ROKRadio : NSObject <ROKRadio>
 
 @property (copy, nonatomic) NSString *requestURL;
 @property (copy, nonatomic) NSString *titleKeyPath;
 @property (copy, nonatomic) NSString *artistKeyPath;
 @property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
-@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
+@property (assign, nonatomic) ROKRadioResponseFormat responseFormat;
 
 
 + (instancetype)radioWithRequestURL:(NSString *)requestURL
