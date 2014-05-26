@@ -12,6 +12,9 @@
 
 typedef ROKRequestResponseFormat ROKRadioResponseFormat;
 
+typedef void (^ROKRadioLastTracksBlock)(ROKRequest *request, NSArray *tracks, NSError *error);
+typedef void (^ROKRadioLastTrackBlock) (ROKRequest *request, id track, NSError *error);
+
 typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 {
     ROKRadioTrackOrderAsc,
@@ -42,5 +45,18 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
                       artistKeyPath:(NSString *)artistKeyPath;
 
 + (instancetype)radioWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
+@interface ROKRadio (ROKRequest)
+
+- (void)lastTracks:(ROKRadioLastTracksBlock)completion;
+- (void)lastTrack:(ROKRadioLastTrackBlock)completion;
+
+@end
+
+@interface ROKRadio (ROKMapping)
+
+@property (assign, nonatomic) Class trackMappingClass;
 
 @end

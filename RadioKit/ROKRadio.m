@@ -8,11 +8,7 @@
 
 #import "ROKRadio.h"
 
-#import "ROKRequest.h"
 #import "ROKTrack.h"
-
-@interface ROKRadio ()
-@end
 
 @implementation ROKRadio
 
@@ -22,6 +18,7 @@
 {
     if (self = [super init])
     {
+        
     }
     return self;
 }
@@ -140,6 +137,31 @@
                     };
     }
     return [mapping[string] integerValue] ?: ROKRadioTrackOrderAsc;
+}
+
+@end
+
+@implementation ROKRadio (ROKRequest)
+
+- (void)lastTracks:(ROKRadioLastTracksBlock)completion
+{
+    NSParameterAssert(completion);
+    
+    ROKRequest *request = [ROKRequest requestWithParameter:self];
+    [request perform:^(NSArray *results, NSError *error) {
+        completion(request, results, error);
+    }];
+}
+
+- (void)lastTrack:(ROKRadioLastTrackBlock)completion
+{
+    NSParameterAssert(completion);
+    
+    [self lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {
+        ROKRadioTrackOrder trackOrder = self.trackOrder ?: ROKRadioTrackOrderAsc;
+        id lastTrack = trackOrder == ROKRadioTrackOrderAsc ? tracks.firstObject : tracks.lastObject;
+        completion(request, lastTrack, error);
+    }];
 }
 
 @end
