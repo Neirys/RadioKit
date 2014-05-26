@@ -16,7 +16,17 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
     ROKRequestResponseFormatXML,
 };
 
-@interface ROKRequest : NSObject
+@protocol ROKRequestParameter <NSObject>
+
+@required
+@property (copy, nonatomic) NSString *URL;
+@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
+@property (copy, nonatomic) NSString *titleKeyPath;
+@property (copy, nonatomic) NSString *artistKeyPath;
+
+@end
+
+@interface ROKRequest : NSObject <ROKRequestParameter>
 
 @property (copy, nonatomic) NSString *URL;
 @property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
@@ -24,7 +34,9 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 @property (copy, nonatomic) NSString *artistKeyPath;
 
 - (instancetype)initWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath;
+
 + (instancetype)requestWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath;
++ (instancetype)requestWithParameter:(id<ROKRequestParameter>)parameter;
 
 - (void)perform:(ROKRequestCompletionBlock)completion;
 

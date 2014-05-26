@@ -37,6 +37,11 @@
     return [[self alloc] initWithURL:URL responseFormat:responseFormat titleKeyPath:titleKeyPath artistKeyPath:artistKeyPath];
 }
 
++ (instancetype)requestWithParameter:(id<ROKRequestParameter>)parameter
+{
+    return [[self alloc] initWithURL:parameter.URL responseFormat:parameter.responseFormat titleKeyPath:parameter.titleKeyPath artistKeyPath:parameter.artistKeyPath];
+}
+
 #pragma mark - Public methods
 
 - (void)perform:(ROKRequestCompletionBlock)completion

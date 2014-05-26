@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ROKRadioProtocol.h"
-#import "ROKRequest.h"
 
-@interface ROKRadio : NSObject <ROKRadio>
+@interface ROKRadio : NSObject
 
 @property (copy, nonatomic) NSString *requestURL;
 @property (copy, nonatomic) NSString *titleKeyPath;
