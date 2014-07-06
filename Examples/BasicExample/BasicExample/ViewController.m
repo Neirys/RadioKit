@@ -8,9 +8,7 @@
 
 #import "ViewController.h"
 
-#import "ROKRequest.h"
-#import "ROKRadio.h"
-#import "ROKTrack.h"
+#import "RadioKit.h"
 
 @interface ViewController ()
 

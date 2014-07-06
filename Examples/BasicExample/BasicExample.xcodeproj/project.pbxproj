@@ -43,6 +43,7 @@
 /* Begin PBXFileReference section */
 		6F01C127505C47208E50445F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C03F5166E0CD4C84BC80D06E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F8972CCC1969CAF100CCD1F0 /* RadioKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadioKit.h; sourceTree = "<group>"; };
 		F8A8DC5F192FB20A004F2A15 /* NSString+Levenshtein.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Levenshtein.h"; sourceTree = "<group>"; };
 		F8A8DC60192FB20A004F2A15 /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
 		F8A8DC61192FB20A004F2A15 /* NSString+ROKExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ROKExtras.h"; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		F8EEEE21192FB06200A02D1F /* RadioKit */ = {
 			isa = PBXGroup;
 			children = (
+				F8972CCC1969CAF100CCD1F0 /* RadioKit.h */,
 				F8EEEE22192FB06200A02D1F /* ROKRadio.h */,
 				F8EEEE23192FB06200A02D1F /* ROKRadio.m */,
 				F8EEEE25192FB06200A02D1F /* ROKRequest.h */,
