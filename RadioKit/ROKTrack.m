@@ -63,17 +63,13 @@ static CGFloat kROKTrackMatchingAccuracy    =   85.0;
     return [self matchingTrackWithTitle:track.title artist:track.artist];
 }
 
-#warning Better way to do string comparison ?
 - (BOOL)matchingTrackWithTitle:(NSString *)title artist:(NSString *)artist
 {
     CGFloat missingTitle = [self.title compareWithString:title matchGain:0 missingCost:1];
     CGFloat missingArtist = [self.artist compareWithString:artist matchGain:0 missingCost:1];
     CGFloat percentTitle = 100.0 - ((missingTitle / self.title.length)*100);
     CGFloat percentArtist = 100.0 - ((missingArtist / self.artist.length)*100);
-    
-#warning I'M LETTING THIS FOR A WHILE TO TEST HOW IT WORKS
-    NSLog(@"title : %f / artist : %f", percentTitle, percentArtist);
-    
+
     return percentTitle >= kROKTrackMatchingAccuracy && percentArtist >= kROKTrackMatchingAccuracy;
 }
 
