@@ -17,6 +17,12 @@
 
 @end
 
+@interface ROKRadio (_ROKMapping)
+
+- (NSArray *)mapRawTracksToObjects:(NSArray *)rawTracks;
+
+@end
+
 @implementation ROKRadio
 
 #pragma mark - Life cycle
@@ -150,6 +156,7 @@
 
 @end
 
+
 @implementation ROKRadio (ROKRequest)
 
 - (void)lastTracks:(ROKRadioLastTracksBlock)completion
@@ -177,17 +184,7 @@
 
 @end
 
-@implementation ROKRadio (ROKMapping)
-
-- (Class<ROKTrack>)trackMappingClass
-{
-    return _trackMappingClass;
-}
-
-- (void)setTrackMappingClass:(Class<ROKTrack>)trackMappingClass
-{
-    _trackMappingClass = trackMappingClass;
-}
+@implementation ROKRadio (_ROKMapping)
 
 - (NSArray *)mapRawTracksToObjects:(NSArray *)objects
 {
@@ -204,6 +201,20 @@
     }
     
     return mappedTracks;
+}
+
+@end
+
+@implementation ROKRadio (ROKMapping)
+
+- (Class<ROKTrack>)trackMappingClass
+{
+    return _trackMappingClass;
+}
+
+- (void)setTrackMappingClass:(Class<ROKTrack>)trackMappingClass
+{
+    _trackMappingClass = trackMappingClass;
 }
 
 @end
