@@ -26,9 +26,8 @@
     Class trackClass = [ROKTrack class];
     NSLog(@"%d", [trackClass conformsToProtocol:@protocol(ROKTrack)]);
     
-    
 //    ROKRequest *voltageRequest = [ROKRequest requestWithURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML titleKeyPath:@"info.chanson" artistKeyPath:@"info.artiste"];
-    ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML trackOrder:ROKRadioTrackOrderAsc titleKeyPath:@"info.title" artistKeyPath:@"info.artist"];
+    ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML trackOrder:ROKRadioTrackOrderAsc titleKeyPath:@"info.chanson" artistKeyPath:@"info.artiste"];
     voltage.trackMappingClass = [ROKTrack class];
     NSLog(@"%@", voltage.trackMappingClass);
     [voltage lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {

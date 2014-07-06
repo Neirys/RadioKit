@@ -42,6 +42,10 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
                        titleKeyPath:(NSString *)titleKeyPath
                       artistKeyPath:(NSString *)artistKeyPath;
 
+@end
+
+@interface ROKRadio (ROKKeyValue)
+
 + (instancetype)radioWithDictionary:(NSDictionary *)dictionary;
 
 @end
@@ -56,10 +60,9 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @interface ROKRadio (ROKMapping)
 
 // must conforms to ROKTrack protocol
-@property (unsafe_unretained, nonatomic) Class trackMappingClass;
+@property (unsafe_unretained, nonatomic) Class<ROKTrack> trackMappingClass;
 
 #warning Try a way to hide this from .h
 - (NSArray *)mapRawTracksToObjects:(NSArray *)objects;
-
 
 @end

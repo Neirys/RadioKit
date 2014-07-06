@@ -62,24 +62,6 @@
                               artistKeyPath:artistKeyPath];
 }
 
-+ (instancetype)radioWithDictionary:(NSDictionary *)dictionary
-{
-    ROKRadio *radio = [[ROKRadio alloc] init];
-    
-    NSArray *keys = dictionary.allKeys;
-    for (NSString *key in keys)
-    {
-        NSError *error;
-        id value = dictionary[key];
-        BOOL validated = [radio validateValue:&value forKey:key error:&error];
-        if (validated)
-        {
-            [radio setValue:value forKey:key];
-        }
-    }
-    return radio;
-}
-
 #pragma mark - Public methods
 
 #pragma mark - Debug
@@ -87,35 +69,6 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: %p> - Request URL : %@ Response format : %d Track order : %d Title key path : %@ Artist key path : %@", self.class, self, self.requestURL, self.responseFormat, self.trackOrder, self.titleKeyPath, self.artistKeyPath];
-}
-
-#pragma mark - NSKeyValueCoding subclasses
-
-- (BOOL)validateResponseFormat:(id *)ioValue error:(NSError * __autoreleasing *)outError
-{
-    if ([(*ioValue) isKindOfClass:[NSString class]])
-    {
-        (*ioValue) = @([self responseFormatForString:(*ioValue)]);
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)validateTrackOrder:(id *)ioValue error:(NSError * __autoreleasing *)outError
-{
-    if ([(*ioValue) isKindOfClass:[NSString class]])
-    {
-        (*ioValue) = @([self trackOrderForString:(*ioValue)]);
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    return;
 }
 
 #pragma mark - Helper methods
@@ -144,6 +97,55 @@
                     };
     }
     return [mapping[string] integerValue] ?: ROKRadioTrackOrderAsc;
+}
+
+@end
+
+@implementation ROKRadio (ROKKeyValue)
+
++ (instancetype)radioWithDictionary:(NSDictionary *)dictionary
+{
+    ROKRadio *radio = [[ROKRadio alloc] init];
+    
+    NSArray *keys = dictionary.allKeys;
+    for (NSString *key in keys)
+    {
+        NSError *error;
+        id value = dictionary[key];
+        BOOL validated = [radio validateValue:&value forKey:key error:&error];
+        if (validated)
+        {
+            [radio setValue:value forKey:key];
+        }
+    }
+    return radio;
+}
+
+- (BOOL)validateResponseFormat:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    if ([(*ioValue) isKindOfClass:[NSString class]])
+    {
+        (*ioValue) = @([self responseFormatForString:(*ioValue)]);
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)validateTrackOrder:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    if ([(*ioValue) isKindOfClass:[NSString class]])
+    {
+        (*ioValue) = @([self trackOrderForString:(*ioValue)]);
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    return;
 }
 
 @end
@@ -177,12 +179,12 @@
 
 @implementation ROKRadio (ROKMapping)
 
-- (Class)trackMappingClass
+- (Class<ROKTrack>)trackMappingClass
 {
     return _trackMappingClass;
 }
 
-- (void)setTrackMappingClass:(Class)trackMappingClass
+- (void)setTrackMappingClass:(Class<ROKTrack>)trackMappingClass
 {
     _trackMappingClass = trackMappingClass;
 }

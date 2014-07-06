@@ -13,7 +13,7 @@
 #import "AFNetworking.h"
 #import "XMLDictionary.h"
 
-#define NO_INTERNET
+//#define NO_INTERNET
 
 NSString * const kROKRequestTitleKey     =   @"title";
 NSString * const kROKRequestArtistKey    =   @"artist";
