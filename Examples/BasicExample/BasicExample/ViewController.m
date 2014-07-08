@@ -31,6 +31,14 @@
         NSLog(@"%@", tracks);
         NSLog(@"%@", error);
     }];
+    
+    NSDictionary *dic = @{@"requestURL": @"http://google.fr",
+                          @"titleKeyPath" : @"title",
+                          @"artistKeyPath" : @"artist",
+                          @"responseFormat" : @"xml",
+                          @"trackOrder" : @"desc"};
+    ROKRadio *radio = [ROKRadio radioWithDictionary:dic];
+    NSLog(@"%@", radio);
 }
 
 @end

@@ -31,7 +31,6 @@
 {
     if (self = [super init])
     {
-        
     }
     return self;
 }
@@ -89,7 +88,7 @@
                     @"json" : @(ROKRequestResponseFormatJSON),
                     };
     }
-    return [mapping[string] integerValue] ?: ROKRequestResponseFormatJSON;
+    return [mapping[string.lowercaseString] integerValue] ?: ROKRequestResponseFormatJSON;
 }
 
 - (ROKRadioTrackOrder)trackOrderForString:(NSString *)string
@@ -102,7 +101,7 @@
                     @"desc" : @(ROKRadioTrackOrderDesc),
                     };
     }
-    return [mapping[string] integerValue] ?: ROKRadioTrackOrderAsc;
+    return [mapping[string.lowercaseString] integerValue] ?: ROKRadioTrackOrderAsc;
 }
 
 @end

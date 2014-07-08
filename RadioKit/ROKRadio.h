@@ -12,7 +12,7 @@
 
 typedef ROKRequestResponseFormat ROKRadioResponseFormat;
 
-typedef void (^ROKRadioLastTracksBlock)(ROKRequest *request, NSArray *tracks, NSError *error);
+typedef void (^ROKRadioLastTracksBlock) (ROKRequest *request, NSArray *tracks, NSError *error);
 typedef void (^ROKRadioLastTrackBlock) (ROKRequest *request, id track, NSError *error);
 
 typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
@@ -24,7 +24,9 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @protocol ROKRequestParameter, ROKTrack;
 
 @protocol ROKRadio <ROKRequestParameter>
+
 @property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
+
 @end
 
 @interface ROKRadio : NSObject <ROKRadio>
