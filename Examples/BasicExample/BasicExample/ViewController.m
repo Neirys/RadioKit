@@ -20,7 +20,11 @@
 {
     [super viewDidLoad];
 
-    ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/playing.xml" responseFormat:ROKRequestResponseFormatXML trackOrder:ROKRadioTrackOrderAsc titleKeyPath:@"info.chanson" artistKeyPath:@"info.artiste"];
+    ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/playing.xml"
+                                       responseFormat:ROKRequestResponseFormatXML
+                                           trackOrder:ROKRadioTrackOrderAsc
+                                         titleKeyPath:@"info.chanson"
+                                        artistKeyPath:@"info.artiste"];
     voltage.trackMappingClass = [ROKTrack class];
     [voltage lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {
         NSLog(@"%@", request);

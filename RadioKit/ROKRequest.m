@@ -18,9 +18,6 @@
 NSString * const kROKRequestTitleKey     =   @"title";
 NSString * const kROKRequestArtistKey    =   @"artist";
 
-@interface ROKRequest ()
-@end
-
 @implementation ROKRequest
 
 #pragma mark - Life cycle methods
@@ -96,13 +93,13 @@ NSString * const kROKRequestArtistKey    =   @"artist";
     NSMutableArray *results = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i < count; i++)
     {
-        id title = titles[i];
-        if ([title isKindOfClass:[NSArray class]])
-            title = [title componentsJoinedByString:@" / "];
+        NSString *title = ([titles[i] isKindOfClass:[NSArray class]]
+                           ? [titles[i] componentsJoinedByString:@" / "]
+                           : titles[i]);
         
-        id artist = artists[i];
-        if ([artist isKindOfClass:[NSArray class]])
-            artist = [artist componentsJoinedByString:@" / "];
+        NSString *artist = ([artists[i] isKindOfClass:[NSArray class]]
+                            ? [artists[i] componentsJoinedByString:@" / "]
+                            : artists[i]);
         
         [results addObject:@{kROKRequestTitleKey : title, kROKRequestArtistKey : artist}];
     }

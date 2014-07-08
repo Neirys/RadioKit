@@ -36,9 +36,16 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 @property (copy, nonatomic) NSString *titleKeyPath;
 @property (copy, nonatomic) NSString *artistKeyPath;
 
-- (instancetype)initWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath;
+- (instancetype)initWithURL:(NSString *)URL
+             responseFormat:(ROKRequestResponseFormat)responseFormat
+               titleKeyPath:(NSString *)titleKeyPath
+              artistKeyPath:(NSString *)artistKeyPath;
 
-+ (instancetype)requestWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath;
++ (instancetype)requestWithURL:(NSString *)URL
+                responseFormat:(ROKRequestResponseFormat)responseFormat
+                  titleKeyPath:(NSString *)titleKeyPath
+                 artistKeyPath:(NSString *)artistKeyPath;
+
 + (instancetype)requestWithParameter:(id<ROKRequestParameter>)parameter;
 
 - (void)perform:(ROKRequestCompletionBlock)completion;
