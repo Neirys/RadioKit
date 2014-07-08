@@ -128,6 +128,12 @@
 
 - (BOOL)validateResponseFormat:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
+    if ([(*ioValue) isKindOfClass:[NSNumber class]])
+    {
+        NSUInteger value = [(NSNumber *)(*ioValue) integerValue];
+        return value == ROKRequestResponseFormatJSON || value == ROKRequestResponseFormatXML;
+    }
+    
     if ([(*ioValue) isKindOfClass:[NSString class]])
     {
         (*ioValue) = @([self responseFormatForString:(*ioValue)]);
@@ -139,6 +145,12 @@
 
 - (BOOL)validateTrackOrder:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
+    if ([(*ioValue) isKindOfClass:[NSNumber class]])
+    {
+        NSUInteger value = [(NSNumber *)(*ioValue) integerValue];
+        return value == ROKRadioTrackOrderAsc || value == ROKRadioTrackOrderDesc;
+    }
+    
     if ([(*ioValue) isKindOfClass:[NSString class]])
     {
         (*ioValue) = @([self trackOrderForString:(*ioValue)]);
@@ -154,7 +166,6 @@
 }
 
 @end
-
 
 @implementation ROKRadio (ROKRequest)
 

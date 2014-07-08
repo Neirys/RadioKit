@@ -35,8 +35,8 @@
     NSDictionary *dic = @{@"requestURL": @"http://google.fr",
                           @"titleKeyPath" : @"title",
                           @"artistKeyPath" : @"artist",
-                          @"responseFormat" : @"xml",
-                          @"trackOrder" : @"desc"};
+                          @"responseFormat" : @(1),
+                          @"trackOrder" : @(1)};
     ROKRadio *radio = [ROKRadio radioWithDictionary:dic];
     NSLog(@"%@", radio);
 }
