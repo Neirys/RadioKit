@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  `ROKTrack` protocol provide the most basic properties used to describe a radio track
+ */
 @protocol ROKTrack <NSObject>
 
 @required
@@ -16,18 +19,33 @@
 
 @end
 
+/**
+ *  `ROKTrack` is a class which could be used to provide object mapping when requesting for radios last played tracks
+ */
 @interface ROKTrack : NSObject <ROKTrack>
 
+// The track's title
 @property (copy, nonatomic) NSString *title;
+
+// The track's artist
 @property (copy, nonatomic) NSString *artist;
 
+// Basic initializer
 + (instancetype)trackWithTitle:(NSString *)title artist:(NSString *)artist;
 
 @end
 
+/**
+ *  `ROKMatching` category provides comparison methods
+ *  These methods used Levenshtein algorithm to compare artist and title string
+ *  Both artist and title should have more than 85% of matching to be considered as the same
+ */
 @interface ROKTrack (ROKMatching)
 
-- (BOOL)matchingTrack:(ROKTrack *)track;
+// Compare with title and artist string
 - (BOOL)matchingTrackWithTitle:(NSString *)title artist:(NSString *)artist;
+
+// Compare with another `ROKTrack` object. This method used the previous one above.
+- (BOOL)matchingTrack:(ROKTrack *)track;
 
 @end
