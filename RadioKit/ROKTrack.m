@@ -56,14 +56,14 @@ static CGFloat kROKTrackMatchingAccuracy    =   85.0;
 
 @end
 
-@implementation ROKTrack (ROKMatching)
+@implementation ROKTrack (ROKCompare)
 
-- (BOOL)matchingTrack:(ROKTrack *)track
+- (BOOL)compareTrack:(ROKTrack *)track
 {
-    return [self matchingTrackWithTitle:track.title artist:track.artist];
+    return [self compareTrackWithTitle:track.title artist:track.artist];
 }
 
-- (BOOL)matchingTrackWithTitle:(NSString *)title artist:(NSString *)artist
+- (BOOL)compareTrackWithTitle:(NSString *)title artist:(NSString *)artist
 {
     CGFloat missingTitle = [self.title compareWithString:title matchGain:0 missingCost:1];
     CGFloat missingArtist = [self.artist compareWithString:artist matchGain:0 missingCost:1];

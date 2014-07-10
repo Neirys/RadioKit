@@ -36,16 +36,16 @@
 @end
 
 /**
- *  `ROKMatching` category provides comparison methods
+ *  `ROKCompare` category provides comparison methods
  *  These methods used Levenshtein algorithm to compare artist and title string
  *  Both artist and title should have more than 85% of matching to be considered as the same
  */
-@interface ROKTrack (ROKMatching)
+@interface ROKTrack (ROKCompare)
 
 // Compare with title and artist string
-- (BOOL)matchingTrackWithTitle:(NSString *)title artist:(NSString *)artist;
+- (BOOL)compareTrackWithTitle:(NSString *)title artist:(NSString *)artist;
 
 // Compare with another `ROKTrack` object. This method used the previous one above.
-- (BOOL)matchingTrack:(ROKTrack *)track;
+- (BOOL)compareTrack:(ROKTrack *)track;
 
 @end
