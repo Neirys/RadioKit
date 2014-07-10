@@ -21,7 +21,6 @@
                                            trackOrder:ROKRadioTrackOrderAsc
                                          titleKeyPath:@"info.chanson"
                                         artistKeyPath:@"info.artiste"];
-    voltage.trackMappingClass = [ROKTrack class];
     [voltage lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {
         NSLog(@"%@", request);
         NSLog(@"%@", tracks);

@@ -24,8 +24,8 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @protocol ROKRequestParameter, ROKTrack;
 
 /**
- *  `ROKRadio` protocol conforms to `ROKRequestParameter` making objects conforming `ROKRadio
- *  suitable to perform request
+ *  `ROKRadio` protocol conforms to `ROKRequestParameter` making objects conforming `ROKRadio`
+ *  suitable to perform requests.
  *  The main difference reside on the track order, locating where is the most recent played track 
  *  in the response (top or bottom).
  *  This parameter will vary from a radio to an other.
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 
 /**
  *  The following methods are the best way to easily retrieve last played tracks
- *  Results type are either NSDictionary objects type or custom objects type if you have set the `trackMappingClass` property (see `ROKRadio (ROKMapping)` interface for more informations)
+ *  Results type are either `ROKTrack` objects by default or custom objects type if you have set the `trackMappingClass` property (see `ROKRadio (ROKMapping)` interface for more informations)
  */
 @interface ROKRadio (ROKRequest)
 

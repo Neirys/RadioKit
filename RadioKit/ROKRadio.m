@@ -31,6 +31,7 @@
 {
     if (self = [super init])
     {
+        _trackMappingClass = [ROKTrack class];
     }
     return self;
 }
