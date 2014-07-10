@@ -176,6 +176,8 @@
 
 @implementation ROKRadio (ROKMapping)
 
+@dynamic mappingClass;
+
 - (Class<ROKTrack>)mappingClass
 {
     return _request.mappingClass;

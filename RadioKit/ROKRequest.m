@@ -139,6 +139,8 @@ NSString * const kROKRequestArtistKey    =   @"artist";
 
 @implementation ROKRequest (ROKMapping)
 
+@dynamic mappingClass;
+
 - (Class<ROKTrack>)mappingClass
 {
     return _mappingClass;
