@@ -66,8 +66,9 @@ ROKRadio *voltage = [ROKRadio radioWithRequestURL:@"http://www.voltage.fr/rcs/pl
 NB : Behind the scene, `ROKRadio` works with a `ROKRequest` object which is the real one performing requests.
 
 ## Object mapping
-`RadioKit` provides you the capability to specify custom objects type as your query results. You only have to set the `trackMappingClass` property of a `ROKRadio` object.
+`RadioKit` provides you the capability to specify custom objects type as your query results. You only have to set the `mappingClass` property of a `ROKRadio` object.
 The only condition is that your custom class conforms to the `ROKTrack` protocol.
+Setting `mappingClass` property of a `ROKRadio` object is actually a proxy and will set the `mappingClass` of the backed `ROKRequest` object.
 
 ## Track comparison
 `ROKTrack` class provides methods to compare track using the `Levenshtein` algorithm (http://en.wikipedia.org/wiki/Levenshtein_distance). `ROKTrack` comparison methods need a 85% of matching in order to consider two tracks as the same.
