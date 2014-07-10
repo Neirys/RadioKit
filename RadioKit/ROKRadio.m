@@ -12,7 +12,7 @@
 
 @interface ROKRadio ()
 {
-    __unsafe_unretained Class _mappingClass;
+    ROKRequest *_request;
 }
 
 @end
@@ -26,7 +26,6 @@
 {
     if (self = [super init])
     {
-        _mappingClass = [ROKTrack class];
     }
     return self;
 }
@@ -45,6 +44,8 @@
         _trackOrder = trackOrder;
         _titleKeyPath = titleKeyPath;
         _artistKeyPath = artistKeyPath;
+        
+        _request = [ROKRequest requestWithParameter:self];
     }
     return self;
 }
@@ -169,10 +170,8 @@
 {
     NSParameterAssert(completion);
     
-    ROKRequest *request = [ROKRequest requestWithParameter:self];
-    request.mappingClass = self.mappingClass;
-    [request perform:^(NSArray *results, NSError *error) {
-        completion(request, results, error);
+    [_request perform:^(NSArray *results, NSError *error) {
+        completion(_request, results, error);
     }];
 }
 
@@ -193,12 +192,12 @@
 
 - (Class<ROKTrack>)mappingClass
 {
-    return _mappingClass;
+    return _request.mappingClass;
 }
 
 - (void)setMappingClass:(Class<ROKTrack>)mappingClass
 {
-    _mappingClass = mappingClass;
+    _request.mappingClass = mappingClass;
 }
 
 @end
