@@ -87,12 +87,11 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @end
 
 /**
- *  This category describes how object mapping works for track results
- *  If the `trackMappingClass` is set, the above request methods will returns objects of type of `trackMappingClass`
- *  `trackMappingClass` type should conforms to `ROKTrack` protocol
+ *  The following `mappingClass` property is actually a proxy to a `ROKRequest` `mappingClass` property
+ *  See `ROKRequest (ROKMapping)` interface for more informations
  */
 @interface ROKRadio (ROKMapping)
 
-@property (unsafe_unretained, nonatomic) Class<ROKTrack> trackMappingClass;
+@property (unsafe_unretained, nonatomic) Class<ROKTrack> mappingClass;
 
 @end

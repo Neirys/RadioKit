@@ -12,16 +12,11 @@
 
 @interface ROKRadio ()
 {
-    __unsafe_unretained Class _trackMappingClass;
+    __unsafe_unretained Class _mappingClass;
 }
 
 @end
 
-@interface ROKRadio (_ROKMapping)
-
-- (NSArray *)mapRawTracksToObjects:(NSArray *)rawTracks;
-
-@end
 
 @implementation ROKRadio
 
@@ -31,7 +26,7 @@
 {
     if (self = [super init])
     {
-        _trackMappingClass = [ROKTrack class];
+        _mappingClass = [ROKTrack class];
     }
     return self;
 }
@@ -175,9 +170,8 @@
     NSParameterAssert(completion);
     
     ROKRequest *request = [ROKRequest requestWithParameter:self];
+    request.mappingClass = self.mappingClass;
     [request perform:^(NSArray *results, NSError *error) {
-        if (self.trackMappingClass)
-            results = [self mapRawTracksToObjects:results];
         completion(request, results, error);
     }];
 }
@@ -195,37 +189,16 @@
 
 @end
 
-@implementation ROKRadio (_ROKMapping)
-
-- (NSArray *)mapRawTracksToObjects:(NSArray *)objects
-{
-    if (!_trackMappingClass || ![_trackMappingClass conformsToProtocol:@protocol(ROKTrack)])
-        return objects;
-    
-    NSMutableArray *mappedTracks = [NSMutableArray arrayWithCapacity:objects.count];
-    for (NSDictionary *track in objects)
-    {
-        id<ROKTrack> mappedTrack = [[_trackMappingClass alloc] init];
-        mappedTrack.title = track[kROKRequestTitleKey];
-        mappedTrack.artist = track[kROKRequestArtistKey];
-        [mappedTracks addObject:mappedTrack];
-    }
-    
-    return mappedTracks;
-}
-
-@end
-
 @implementation ROKRadio (ROKMapping)
 
-- (Class<ROKTrack>)trackMappingClass
+- (Class<ROKTrack>)mappingClass
 {
-    return _trackMappingClass;
+    return _mappingClass;
 }
 
-- (void)setTrackMappingClass:(Class<ROKTrack>)trackMappingClass
+- (void)setMappingClass:(Class<ROKTrack>)mappingClass
 {
-    _trackMappingClass = trackMappingClass;
+    _mappingClass = mappingClass;
 }
 
 @end

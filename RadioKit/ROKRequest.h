@@ -19,6 +19,8 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
     ROKRequestResponseFormatXML,
 };
 
+@protocol ROKTrack;
+
 /**
  *  `ROKRequestParameter` protocol defines objects suitable to be used in order to perform a radio request
  */
@@ -87,7 +89,19 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 + (instancetype)requestWithParameter:(id<ROKRequestParameter>)parameter;
 
 // Execute the request asynchronously and return result in a block
-// The result is an array of dictionary following the syntax : @{@"title" : @"A title", @"artist" : @"An artist"}
+// By default, request's result is an array of `ROKTrack` objects
 - (void)perform:(ROKRequestCompletionBlock)completion;
+
+@end
+
+/**
+ *  This category describes how object mapping works for track results
+ *  If the `mappingClass` is set, the request methods will returns objects of type of `mappingClass`
+ *  `mappingClass` type should conforms to `ROKTrack` protocol
+ *  By default, `mappingClass` is set to the `ROKTrack` class, so result of `perform:` method will be an array of `ROKTrack`
+ */
+@interface ROKRequest (ROKMapping)
+
+@property (unsafe_unretained, nonatomic) Class<ROKTrack> mappingClass;
 
 @end

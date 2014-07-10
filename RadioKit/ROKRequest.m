@@ -8,7 +8,7 @@
 
 #import "ROKRequest.h"
 
-#import "ROKRadioProtocol.h"
+#import "ROKTrack.h"
 
 #import "AFNetworking.h"
 #import "XMLDictionary.h"
@@ -18,13 +18,35 @@
 NSString * const kROKRequestTitleKey     =   @"title";
 NSString * const kROKRequestArtistKey    =   @"artist";
 
+@interface ROKRequest ()
+{
+    __unsafe_unretained Class _mappingClass;
+}
+
+@end
+
+@interface ROKRequest (_ROKMapping)
+
+- (NSArray *)mapRawTracksToObjects:(NSArray *)rawTracks;
+
+@end
+
 @implementation ROKRequest
 
 #pragma mark - Life cycle methods
 
-- (instancetype)initWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath
+- (id)init
 {
     if (self = [super init])
+    {
+        _mappingClass = [ROKTrack class];
+    }
+    return self;
+}
+
+- (instancetype)initWithURL:(NSString *)URL responseFormat:(ROKRequestResponseFormat)responseFormat titleKeyPath:(NSString *)titleKeyPath artistKeyPath:(NSString *)artistKeyPath
+{
+    if (self = [self init])
     {
         _requestURL = URL;
         _responseFormat = responseFormat;
@@ -52,14 +74,13 @@ NSString * const kROKRequestArtistKey    =   @"artist";
     
     [self performRequestWithResponseFormat:self.responseFormat completion:^(NSArray *results, NSError *error) {
 #ifndef NO_INTERNET
-        completion(results, error);
-#else
-        NSArray *fixtures = @[
-                              @{kROKRequestArtistKey : @"Eminem", kROKRequestTitleKey : @"Rythm or Reason"},
-                              @{kROKRequestArtistKey : @"David Dallas", kROKRequestTitleKey : @"Runnin"},
-                              ];
-        completion(fixtures, nil);
+        results = @[
+                    @{kROKRequestArtistKey : @"Eminem", kROKRequestTitleKey : @"Rythm or Reason"},
+                    @{kROKRequestArtistKey : @"David Dallas", kROKRequestTitleKey : @"Runnin"},
+                    ];
 #endif
+        results = _mappingClass ? [self mapRawTracksToObjects:results] : results;
+        completion(results, error);
     }];
 }
 
@@ -120,6 +141,41 @@ NSString * const kROKRequestArtistKey    =   @"artist";
                     };
     }
     return mapping[@(responseFormat)] ?: [AFJSONResponseSerializer new];
+}
+
+@end
+
+@implementation ROKRequest (ROKMapping)
+
+- (Class<ROKTrack>)mappingClass
+{
+    return _mappingClass;
+}
+
+- (void)setMappingClass:(Class<ROKTrack>)mappingClass
+{
+    _mappingClass = mappingClass;
+}
+
+@end
+
+@implementation ROKRequest (_ROKMapping)
+
+- (NSArray *)mapRawTracksToObjects:(NSArray *)rawTracks
+{
+    if (!_mappingClass || ![_mappingClass conformsToProtocol:@protocol(ROKTrack)])
+        return rawTracks;
+    
+    NSMutableArray *mappedTracks = [NSMutableArray arrayWithCapacity:rawTracks.count];
+    for (NSDictionary *track in rawTracks)
+    {
+        id<ROKTrack> mappedTrack = [[_mappingClass alloc] init];
+        mappedTrack.title = track[kROKRequestTitleKey];
+        mappedTrack.artist = track[kROKRequestArtistKey];
+        [mappedTracks addObject:mappedTrack];
+    }
+    
+    return mappedTracks;
 }
 
 @end
