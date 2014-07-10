@@ -28,10 +28,10 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 @protocol ROKRequestParameter <NSObject>
 
 @required
-@property (copy, nonatomic) NSString *requestURL;
-@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
-@property (copy, nonatomic) NSString *titleKeyPath;
-@property (copy, nonatomic) NSString *artistKeyPath;
+@property (copy, nonatomic, readonly) NSString *requestURL;
+@property (assign, nonatomic, readonly) ROKRequestResponseFormat responseFormat;
+@property (copy, nonatomic, readonly) NSString *titleKeyPath;
+@property (copy, nonatomic, readonly) NSString *artistKeyPath;
 
 @end
 
@@ -62,16 +62,16 @@ typedef NS_ENUM(NSUInteger, ROKRequestResponseFormat)
 @interface ROKRequest : NSObject <ROKRequestParameter>
 
 // The URL used by radios for fetching their last playing tracks
-@property (copy, nonatomic) NSString *requestURL;
+@property (copy, nonatomic, readonly) NSString *requestURL;
 
 // The response format the above URL (usually JSON or XML)
-@property (assign, nonatomic) ROKRequestResponseFormat responseFormat;
+@property (assign, nonatomic, readonly) ROKRequestResponseFormat responseFormat;
 
 // The response's title key-path
-@property (copy, nonatomic) NSString *titleKeyPath;
+@property (copy, nonatomic, readonly) NSString *titleKeyPath;
 
 // The response's artist key-path
-@property (copy, nonatomic) NSString *artistKeyPath;
+@property (copy, nonatomic, readonly) NSString *artistKeyPath;
 
 // Create a ROKRequest using the following mandatory parameters
 - (instancetype)initWithURL:(NSString *)URL

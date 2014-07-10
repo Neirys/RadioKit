@@ -26,6 +26,14 @@
         NSLog(@"%@", tracks);
         NSLog(@"%@", error);
     }];
+    
+    NSDictionary *dic = @{@"requestURL": @"http://www.voltage.fr/rcs/playing.xml",
+                          @"responseFormat" : @(ROKRequestResponseFormatXML),
+                          @"trackOrder" : @(ROKRadioTrackOrderDesc),
+                          @"titleKeyPath" : @"info.chanson",
+                          @"artistKeyPath" : @"info.artiste"};
+    ROKRadio *radio = [ROKRadio radioWithDictionary:dic];
+    NSLog(@"%@", radio);
 }
 
 @end

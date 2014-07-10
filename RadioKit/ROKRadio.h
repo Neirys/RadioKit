@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @protocol ROKRadio <ROKRequestParameter>
 
 // Describes where the most recent track is locating in the response (first one or last one)
-@property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
+@property (assign, nonatomic, readonly) ROKRadioTrackOrder trackOrder;
 
 @end
 
@@ -46,11 +46,11 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 @interface ROKRadio : NSObject <ROKRadio>
 
 // See ROKRequest.h for explanations on the following properties
-@property (copy, nonatomic) NSString *requestURL;
-@property (copy, nonatomic) NSString *titleKeyPath;
-@property (copy, nonatomic) NSString *artistKeyPath;
-@property (assign, nonatomic) ROKRadioTrackOrder trackOrder;
-@property (assign, nonatomic) ROKRadioResponseFormat responseFormat;
+@property (copy, nonatomic, readonly) NSString *requestURL;
+@property (copy, nonatomic, readonly) NSString *titleKeyPath;
+@property (copy, nonatomic, readonly) NSString *artistKeyPath;
+@property (assign, nonatomic, readonly) ROKRadioTrackOrder trackOrder;
+@property (assign, nonatomic, readonly) ROKRadioResponseFormat responseFormat;
 
 
 + (instancetype)radioWithRequestURL:(NSString *)requestURL
