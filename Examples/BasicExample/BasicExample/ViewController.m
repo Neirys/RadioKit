@@ -10,14 +10,6 @@
 
 #import "RadioKit.h"
 
-@interface CustomTrack : ROKTrack
-
-@end
-
-@implementation CustomTrack
-
-@end
-
 @implementation ViewController
 
 - (void)viewDidLoad
@@ -29,20 +21,11 @@
                                            trackOrder:ROKRadioTrackOrderAsc
                                          titleKeyPath:@"info.chanson"
                                         artistKeyPath:@"info.artiste"];
-//    voltage.mappingClass = [CustomTrack class];
     [voltage lastTracks:^(ROKRequest *request, NSArray *tracks, NSError *error) {
         NSLog(@"%@", request);
         NSLog(@"%@", tracks);
         NSLog(@"%@", error);
     }];
-    
-//    NSDictionary *dic = @{@"requestURL": @"http://www.voltage.fr/rcs/playing.xml",
-//                          @"responseFormat" : @(ROKRequestResponseFormatXML),
-//                          @"trackOrder" : @(ROKRadioTrackOrderDesc),
-//                          @"titleKeyPath" : @"info.chanson",
-//                          @"artistKeyPath" : @"info.artiste"};
-//    ROKRadio *radio = [ROKRadio radioWithDictionary:dic];
-//    NSLog(@"%@", radio);
 }
 
 @end

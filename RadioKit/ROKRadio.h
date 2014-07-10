@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
  *  `ROKRadio` is a basic object type used to describe a radio entity.
  *  `ROKRadio` conforms to `ROKRadio` protocol which conforms itself to 'ROKRequestParameter` protocol
  *  making these objects suitable to perform request.
+ *  A `ROKRadio` object is backed by a `ROKRequest` object which is the one performing requests.
  */
 @interface ROKRadio : NSObject <ROKRadio>
 
