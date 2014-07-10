@@ -15,8 +15,6 @@ static CGFloat kROKTrackMatchingAccuracy    =   85.0;
 
 @implementation ROKTrack
 
-#pragma mark - Life cycle
-
 - (instancetype)initWithTitle:(NSString *)title artist:(NSString *)artist
 {
     self = [super init];
@@ -33,8 +31,6 @@ static CGFloat kROKTrackMatchingAccuracy    =   85.0;
     return [[self alloc] initWithTitle:title artist:artist];
 }
 
-#pragma mark - Comparaison object
-
 - (BOOL)isEqual:(id)object
 {
     if (![object isKindOfClass:self.class])
@@ -45,8 +41,6 @@ static CGFloat kROKTrackMatchingAccuracy    =   85.0;
     return ([self.title.lowercaseAndNoAccentString isEqualToString:track.title.lowercaseAndNoAccentString] &&
             [self.artist.lowercaseAndNoAccentString isEqualToString:track.artist.lowercaseAndNoAccentString]);
 }
-
-#pragma mark - Debug methods
 
 - (NSString *)description
 {

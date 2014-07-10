@@ -22,21 +22,13 @@
 
 #pragma mark - Life cycle
 
-- (id)init
-{
-    if (self = [super init])
-    {
-    }
-    return self;
-}
-
 - (instancetype)initWithRequestURL:(NSString *)requestURL
                     responseFormat:(ROKRequestResponseFormat)responseFormat
                         trackOrder:(ROKRadioTrackOrder)trackOrder
                       titleKeyPath:(NSString *)titleKeyPath
                      artistKeyPath:(NSString *)artistKeyPath
 {
-    self = [self init];
+    self = [super init];
     if (self)
     {
         _requestURL = requestURL;
@@ -64,16 +56,10 @@
                               artistKeyPath:artistKeyPath];
 }
 
-#pragma mark - Public methods
-
-#pragma mark - Debug
-
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: %p> - Request URL : %@ Response format : %d Track order : %d Title key path : %@ Artist key path : %@", self.class, self, self.requestURL, self.responseFormat, self.trackOrder, self.titleKeyPath, self.artistKeyPath];
 }
-
-#pragma mark - Helper methods
 
 - (ROKRequestResponseFormat)responseFormatForString:(NSString *)string
 {

@@ -33,8 +33,6 @@ NSString * const kROKRequestArtistKey    =   @"artist";
 
 @implementation ROKRequest
 
-#pragma mark - Life cycle methods
-
 - (id)init
 {
     if (self = [super init])
@@ -66,8 +64,6 @@ NSString * const kROKRequestArtistKey    =   @"artist";
     return [[self alloc] initWithURL:parameter.requestURL responseFormat:parameter.responseFormat titleKeyPath:parameter.titleKeyPath artistKeyPath:parameter.artistKeyPath];
 }
 
-#pragma mark - Public methods
-
 - (void)perform:(ROKRequestCompletionBlock)completion
 {
     NSParameterAssert(completion);
@@ -83,8 +79,6 @@ NSString * const kROKRequestArtistKey    =   @"artist";
         completion(results, error);
     }];
 }
-
-#pragma mark - Private methods
 
 - (void)performRequestWithResponseFormat:(ROKRequestResponseFormat)responseFormat completion:(ROKRequestCompletionBlock)completion
 {
@@ -127,8 +121,6 @@ NSString * const kROKRequestArtistKey    =   @"artist";
     
     return results.copy;
 }
-
-#pragma mark - Helper methods
 
 - (AFHTTPResponseSerializer<AFURLResponseSerialization>*)responseSerializerForResponseFormat:(ROKRequestResponseFormat)responseFormat
 {
