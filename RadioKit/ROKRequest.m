@@ -91,7 +91,7 @@ NSString * const kROKRequestArtistKey    =   @"artist";
     NSParameterAssert(completion);
     
     [self performRequestWithResponseFormat:self.responseFormat completion:^(NSArray *results, NSError *error) {
-#ifndef NO_INTERNET
+#ifdef NO_INTERNET
         results = @[
                     @{kROKRequestArtistKey : @"Eminem", kROKRequestTitleKey : @"Rythm or Reason"},
                     @{kROKRequestArtistKey : @"David Dallas", kROKRequestTitleKey : @"Runnin"},
