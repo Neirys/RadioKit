@@ -48,6 +48,21 @@
         NSLog(@"%@", tracks);
         NSLog(@"%@", error);
     }];
+    
+    [voltage lastTrack:^(ROKRequest *request, id track, NSError *error) {
+        if (error)
+            return;
+        
+        ROKTrack *playingTrack = (ROKTrack *)track;
+        NSString *message = [NSString stringWithFormat:@"%@ - %@", playingTrack.title, playingTrack.artist];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[[UIAlertView alloc] initWithTitle:@"Now playing on Voltage FM"
+                                        message:message delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil]
+             show];
+        });
+    }];
 }
 
 @end
