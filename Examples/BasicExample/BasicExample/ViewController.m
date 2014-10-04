@@ -48,13 +48,9 @@
         NSLog(@"%@", tracks);
         NSLog(@"%@", error);
     }];
-    
-    [voltage lastTrack:^(ROKRequest *request, id track, NSError *error) {
-        if (error)
-            return;
-        
-        ROKTrack *playingTrack = (ROKTrack *)track;
-        NSString *message = [NSString stringWithFormat:@"%@ - %@", playingTrack.title, playingTrack.artist];
+
+    [voltage lastTrack:^(ROKRequest *request, id<ROKTrack> track, NSError *error) {
+        NSString *message = [NSString stringWithFormat:@"%@ - %@", track.title, track.artist];
         dispatch_async(dispatch_get_main_queue(), ^{
             [[[UIAlertView alloc] initWithTitle:@"Now playing on Voltage FM"
                                         message:message delegate:nil

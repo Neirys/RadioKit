@@ -32,18 +32,18 @@
 
 #import "ROKRequest.h"
 
+@protocol ROKRequestParameter, ROKTrack;
+
 typedef ROKRequestResponseFormat ROKRadioResponseFormat;
 
 typedef void (^ROKRadioLastTracksBlock) (ROKRequest *request, NSArray *tracks, NSError *error);
-typedef void (^ROKRadioLastTrackBlock) (ROKRequest *request, id track, NSError *error);
+typedef void (^ROKRadioLastTrackBlock) (ROKRequest *request, id<ROKTrack> track, NSError *error);
 
 typedef NS_ENUM(NSUInteger, ROKRadioTrackOrder)
 {
     ROKRadioTrackOrderAsc,
     ROKRadioTrackOrderDesc,
 };
-
-@protocol ROKRequestParameter, ROKTrack;
 
 /**
  *  `ROKRadio` protocol conforms to `ROKRequestParameter` making objects conforming `ROKRadio`
